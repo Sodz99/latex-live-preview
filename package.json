@@ -1,0 +1,101 @@
+{
+  "name": "latex-live-preview",
+  "displayName": "LaTeX Live Preview",
+  "description": "Live LaTeX to PDF preview with automatic recompilation — like Overleaf in VS Code",
+  "version": "0.0.1",
+  "publisher": "sohan-arun",
+  "engines": {
+    "vscode": "^1.74.0"
+  },
+  "categories": [
+    "Other",
+    "Visualization"
+  ],
+  "keywords": [
+    "latex",
+    "pdf",
+    "preview",
+    "live",
+    "overleaf"
+  ],
+  "activationEvents": [
+    "onLanguage:latex"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "latex-preview.showPreview",
+        "title": "LaTeX: Show Live Preview"
+      },
+      {
+        "command": "latex-preview.compile",
+        "title": "LaTeX: Compile Now"
+      }
+    ],
+    "keybindings": [
+      {
+        "command": "latex-preview.showPreview",
+        "key": "ctrl+alt+v",
+        "mac": "cmd+alt+v",
+        "when": "editorLangId == latex"
+      },
+      {
+        "command": "latex-preview.compile",
+        "key": "ctrl+alt+b",
+        "mac": "cmd+alt+b",
+        "when": "editorLangId == latex"
+      }
+    ],
+    "configuration": {
+      "title": "LaTeX Live Preview",
+      "properties": {
+        "latex-preview.engine": {
+          "type": "string",
+          "default": "pdflatex",
+          "enum": [
+            "pdflatex",
+            "xelatex",
+            "lualatex"
+          ],
+          "description": "LaTeX compilation engine"
+        },
+        "latex-preview.useLatexmk": {
+          "type": "boolean",
+          "default": true,
+          "description": "Use latexmk for compilation (recommended for multi-file projects)"
+        },
+        "latex-preview.liveMode": {
+          "type": "boolean",
+          "default": false,
+          "description": "Recompile as you type (default: compile on save only)"
+        },
+        "latex-preview.debounceDelay": {
+          "type": "number",
+          "default": 2000,
+          "description": "Delay in ms before recompiling after changes (only in live mode)"
+        },
+        "latex-preview.rootFile": {
+          "type": "string",
+          "default": "",
+          "description": "Path to the root .tex file (auto-detected from %!TEX root if empty)"
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "package": "vsce package"
+  },
+  "devDependencies": {
+    "@types/vscode": "1.74.0",
+    "@types/node": "18.19.0",
+    "typescript": "5.3.3",
+    "@vscode/vsce": "2.22.0"
+  },
+  "dependencies": {
+    "pdfjs-dist": "4.10.38"
+  }
+}

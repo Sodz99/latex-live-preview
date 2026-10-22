@@ -1,0 +1,33 @@
+# Data, models, outputs
+data/
+datasets/
+models/
+outputs/
+*.csv
+*.parquet
+*.pkl
+*.pt
+*.pth
+*.h5
+*.onnx
+*.ckpt
+*.zip
+*.mkv
+*.mp4
+
+# Environments + caches
+venv/
+.venv*/
+env/
+node_modules/
+__pycache__/
+.ipynb_checkpoints/
+
+# Secrets
+.env
+.env.*
+!.env.example
+out/
+*.vsix
+test/*
+!test/sample.tex
